@@ -1,0 +1,225 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://sprites/idle_strip2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://sprites/dash_strip4.png" type="Texture" id=3]
+[ext_resource path="res://scripts/test.gd" type="Script" id=4]
+[ext_resource path="res://sprites/coll_ind.png" type="Texture" id=5]
+[ext_resource path="res://scripts/object_camera.gd" type="Script" id=6]
+[ext_resource path="res://sprites/jump_strip3.png" type="Texture" id=7]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 26.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Jump"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Run"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Coll" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 306, 102 )
+rotating = true
+current = true
+smoothing_enabled = true
+script = ExtResource( 6 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 306, 102 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+position = Vector2( 0, -6 )
+texture = ExtResource( 3 )
+hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 5 )
+
+[node name="AnimPlayer" type="AnimationPlayer" parent="Player"]
+anims/Idle = SubResource( 2 )
+anims/Jump = SubResource( 6 )
+anims/RESET = SubResource( 3 )
+anims/Run = SubResource( 4 )
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Ground" type="Polygon2D" parent="Stage"]
+position = Vector2( -24, 4 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 194, 186, 332.624, 186, 504, 86, 604, 76, 604, -174, 194, -174, 194, 76, 74, 76, 74, -174, 74, -254, 194, -254, 494, -254, 604, -254, 764, -254, 764, -174, 764, 76, 764, 286, 504, 286, 374, 286, 194, 286 )
+
+[node name="Ground2" type="Polygon2D" parent="Stage"]
+position = Vector2( -24, 4 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 28, 120, 32, 226, 132, 378, 46, 436, -98, 408, -156, 220, -140, 116, -140, 116 )
+
+[node name="Ground3" type="Polygon2D" parent="Stage"]
+position = Vector2( -24, 4 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 42, 532, 216, 462, 282, 580, 30, 690, 50, 768, 238, 856, 140, 1000, -76, 844, -108, 720, -80, 574 )
+
+[node name="Ground4" type="Polygon2D" parent="Stage"]
+position = Vector2( 458, -94 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 42, 532, 216, 462, 282, 580, 30, 690, 50, 768, 238, 856, 140, 1000, -76, 844, -108, 720, -80, 574 )
